@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Boulder.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Bat.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/Font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/bg_brown.png" type="Texture" id=4]
+[ext_resource path="res://Main.gd" type="Script" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 12.4989, 483.651 )
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="Background" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 519.098, 297.024 )
+scale = Vector2( 26.9549, 15.8512 )
+texture = ExtResource( 4 )
+
+[node name="DeleteArea" type="Area2D" parent="."]
+position = Vector2( -110.591, -9.28201 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeleteArea"]
+position = Vector2( -123.796, 303.701 )
+shape = SubResource( 1 )
+
+[node name="BoulderSpawn" type="Timer" parent="."]
+
+[node name="InitialScene" type="Node2D" parent="."]
+
+[node name="Boulder" parent="InitialScene" instance=ExtResource( 1 )]
+position = Vector2( 79.6713, 338.373 )
+rotation = 0.785398
+scale = Vector2( 1, 1 )
+boulder_speed = 0
+
+[node name="Boulder3" parent="InitialScene" instance=ExtResource( 1 )]
+position = Vector2( 50.092, 510.498 )
+rotation = -0.785398
+scale = Vector2( 1, 1.5 )
+boulder_speed = 0
+
+[node name="Boulder2" parent="InitialScene" instance=ExtResource( 1 )]
+position = Vector2( 181.786, 496.218 )
+rotation = 1.22173
+scale = Vector2( 1.2, 0.8 )
+boulder_speed = 0
+
+[node name="Bat" parent="." instance=ExtResource( 2 )]
+position = Vector2( 143.197, 280.048 )
+scale = Vector2( 0.25, 0.25 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 124.101
+margin_top = 39.6667
+margin_right = 927.101
+margin_bottom = 301.667
+grow_horizontal = 2
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "You are a bat in a dark cave.
+CLICK the screen to echolocate in that direction.
+Find the cave entrance.
+Press SPACE to flap wings.
+Avoid crashing with the cave."
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextTween" type="Tween" parent="Label"]
+[connection signal="area_entered" from="DeleteArea" to="." method="_on_DeleteArea_area_entered"]
+[connection signal="timeout" from="BoulderSpawn" to="." method="_on_BoulderSpawn_timeout"]

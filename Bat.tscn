@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Bat.gd" type="Script" id=1]
+[ext_resource path="res://assets/test_body.png" type="Texture" id=2]
+[ext_resource path="res://assets/test_wing.png" type="Texture" id=3]
+[ext_resource path="res://assets/wing_left.tres" type="Material" id=4]
+[ext_resource path="res://assets/wing_right.tres" type="Material" id=5]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 11.6771
+height = 58.9751
+
+[node name="Bat" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+rotation = 0.558505
+shape = SubResource( 1 )
+
+[node name="WingCenter" type="Node2D" parent="."]
+
+[node name="WingLeft" type="Sprite" parent="WingCenter"]
+material = ExtResource( 4 )
+position = Vector2( 31.2264, 32.9539 )
+rotation = 0.558505
+scale = Vector2( 0.5, 0.6 )
+texture = ExtResource( 3 )
+
+[node name="WingRight" type="Sprite" parent="WingCenter"]
+material = ExtResource( 5 )
+position = Vector2( -42.5519, -4.7646 )
+rotation = 0.404916
+scale = Vector2( 0.5, 0.6 )
+texture = ExtResource( 3 )
+flip_h = true
+
+[node name="Body" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
