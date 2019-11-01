@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Bat.gd" type="Script" id=1]
 [ext_resource path="res://assets/test_body.png" type="Texture" id=2]
 [ext_resource path="res://assets/test_wing.png" type="Texture" id=3]
 [ext_resource path="res://assets/wing_left.tres" type="Material" id=4]
 [ext_resource path="res://assets/wing_right.tres" type="Material" id=5]
+[ext_resource path="res://assets/sounds/jump.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sounds/echo.wav" type="AudioStream" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 11.6771
@@ -42,3 +44,12 @@ texture = ExtResource( 2 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -15.0
+
+[node name="Echo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -30.0
+pitch_scale = 2.0

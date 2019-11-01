@@ -27,6 +27,10 @@ func _physics_process(delta):
 func _on_Boulder_body_entered(body):
 	#print('Hit detected with body ', body)
 	emit_signal("hit")
+	tween.stop_all()
+	tween.interpolate_property($Sprite, "modulate", $Sprite.modulate, 
+	on_color, 2, Tween.TRANS_ELASTIC, Tween.EASE_OUT)
+	tween.start()
 
 
 func _on_Boulder_area_entered(area):
@@ -42,3 +46,6 @@ func _on_Boulder_area_entered(area):
 
 func start_moving():
 	boulder_speed = boulder_speed_default
+
+func freeze():
+	boulder_speed = 0
